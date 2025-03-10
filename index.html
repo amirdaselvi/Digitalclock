@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Digital Clock</title>
+    <style>
+   
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #00f7ff;
+            font-family: 'Arial', sans-serif;
+        }
+        .clock {
+            font-size: 80px;
+            font-weight: bold;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+            text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff;
+            }
+            to {
+                transform: scale(1.05);
+                text-shadow: 0 0 25px #00f7ff, 0 0 40px #00f7ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock" id="clock" onload="showTime()">00:00:00</div>
+    <script>
+        
+    
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); 
+            var m = date.getMinutes(); 
+            var s = date.getSeconds(); 
+            var session = "AM";
+            
+            if (h == 0) {
+                h = 12;
+            }
+            
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+            
+            if (h < 10) {
+                h = "0" + h;
+            }
+            if (m < 10) {
+                m = "0" + m;
+            }
+            if (s < 10) {
+                s = "0" + s;
+            }
+            
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("clock").innerText = time;
+            document.getElementById("clock").textContent = time;
+            
+            setTimeout(showTime, 1000);
+        }
+        
+        showTime();
+    </script>
+</body>
+</html>
